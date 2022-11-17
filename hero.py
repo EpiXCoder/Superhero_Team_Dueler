@@ -4,14 +4,14 @@ from armor import Armor
 from weapon import Weapon
 
 class Hero:
-  # We want our hero to have a default "starting_health",
-  # so we can set that in the function header.
     def __init__(self, name, starting_health=100):
         self.name = name
         self.starting_health = starting_health
         self.current_health = starting_health
         self.abilities = list()
         self.armors = list()
+        self.deaths = 0
+        self.kills = 0
 
     # def fight(self, opponent):
     #     duelers=[self.name, opponent.name]
@@ -61,13 +61,29 @@ class Hero:
 
             if self.is_alive() and not opponent.is_alive():
                 print(f'{self.name} defeats {opponent.name}!')
+                self.add_kill(1)
+                opponent.add_death(1)
             elif not self.is_alive() and opponent.is_alive():
                 print(f'{opponent.name} defeats {self.name}!')
+                opponent.add_kill(1)
+                self.add_death(1)
             elif not self.is_alive() and not opponent.is_alive():
                 print(f'Both duelers succumb to fatal injuries!')
+                self.add_kill(1)
+                self.add_death(1)
+                opponent.add_death(1)
+                opponent.add_kill(1)
+
+                
 
     def add_weapon(self, weapon):
         self.abilities.append(weapon)
+
+    def add_kill(self, num_kills):
+        self.kills += num_kills
+
+    def add_death(self, num_deaths):
+        self.deaths += num_deaths
 
 
 if __name__ == "__main__":

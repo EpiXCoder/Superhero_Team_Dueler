@@ -15,7 +15,7 @@ class Team:
             return 0
 
     def view_all_heroes(self):
-        print(f'List of Team {self.name} heroes:')
+        print(f'List of {self.name} heroes:')
         for hero in self.heroes:
             print(hero.name)
 
